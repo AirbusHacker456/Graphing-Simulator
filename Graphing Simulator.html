@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graphing Simulator</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+<body>
+	<h1>Graphing Simulator</h1>
+	<canvas id="myChart"></canvas>
+	<label for="chartType">Chart Type:</label>
+	<select id="chartType" onchange="changeChartType()">
+		<option value="line">Line</option>
+		<option value="bar">Bar</option>
+		<option value="pie">Pie</option>
+	</select>
+	<button onclick="editData()">Edit Data</button>
+	<script>
+		var chartType = 'line';
+		var chartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Sales',
+				data: [12, 19, 3, 5, 2, 3, 9],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+				],
+				borderWidth: 1
+			}]
+		};
+		var chartOptions = {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		};
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+			type: chartType,
+			data: chartData,
+			options: chartOptions
+		});
+		function changeChartType() {
+			chartType = document.getElementById('chartType').value;
+			chart.destroy();
+			chart = new Chart(ctx, {
+				type: chartType,
+				data: chartData,
+				options: chartOptions
+			});
+		}
+		function editData() {
+			var newData = [];
+			for (var i = 0; i < chartData.datasets[0].data.length; i++) {
+				var point = prompt('Enter data for ' + chartData.labels[i] + ':');
+				newData.push(point);
+			}
+			chartData.datasets[0].data = newData;
+			chart.update();
+		}
+	</script>
+</body>
+</html>

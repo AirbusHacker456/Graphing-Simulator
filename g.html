@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graphing Simulator</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="graph"></div>
+  
+  <form onsubmit="return false;">
+    <label for="x-input">X Value:</label>
+    <input type="number" id="x-input" required>
+    <label for="y-input">Y Value:</label>
+    <input type="number" id="y-input" required>
+    <button onclick="addData()">Add Data</button>
+  </form>
+  
+  <script>
+    // Initialize the data for the graph
+    var x = [1, 2, 3, 4, 5];
+    var y = [1, 4, 9, 16, 25];
+    var trace = {
+      x: x,
+      y: y,
+      type: 'scatter'
+    };
+    
+    // Set the layout for the graph
+    var layout = {
+      title: 'Graphing Simulator',
+      xaxis: {
+        title: 'X Axis'
+      },
+      yaxis: {
+        title: 'Y Axis'
+      }
+    };
+    
+    // Plot the graph using Plotly
+    Plotly.newPlot('graph', [trace], layout);
+    
+    // Function to add new data to the graph
+    function addData() {
+      var newX = parseFloat(document.getElementById('x-input').value);
+      var newY = parseFloat(document.getElementById('y-input').value);
+      x.push(newX);
+      y.push(newY);
+      Plotly.update('graph', {x: [x], y: [y]});
+      document.getElementById('x-input').value = '';
+      document.getElementById('y-input').value = '';
+    }
+  </script>
+</body>
+</html>

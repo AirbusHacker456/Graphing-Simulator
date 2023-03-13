@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Binary Calculator</title>
+    <script>
+      function calculate() {
+        var binary1 = document.getElementById("binary1").value;
+        var binary2 = document.getElementById("binary2").value;
+
+        // convert binary numbers to decimal
+        var decimal1 = parseInt(binary1, 2);
+        var decimal2 = parseInt(binary2, 2);
+
+        // perform calculation
+        var result = decimal1 + decimal2;
+
+        // convert result to binary
+        var binaryResult = result.toString(2);
+
+        // display result
+        document.getElementById("result").value = binaryResult;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Binary Calculator</h1>
+    <label>Binary Number 1:</label>
+    <input type="text" id="binary1"><br><br>
+    <label>Binary Number 2:</label>
+    <input type="text" id="binary2"><br><br>
+    <button onclick="calculate()">Calculate</button><br><br>
+    <label>Result:</label>
+    <input type="text" id="result">
+  </body>
+</html>
